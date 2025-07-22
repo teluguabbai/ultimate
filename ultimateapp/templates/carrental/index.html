@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Rental System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg,rgb(122, 172, 205), #6DD5FA);
+            background-attachment: fixed;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .w3-teal {
+            background-color: #2C3E50 !important;
+            color: white !important;
+            padding: 20px 0;
+        }
+
+        .w3-bar.w3-black {
+            background-color: rgba(0, 0, 0, 0.7) !important;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        .w3-display-container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .w3-display-middle {
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .w3-btn.w3-indigo {
+            background-color: #3498DB !important;
+            color: white !important;
+            padding: 20px 40px !important;
+            margin: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.5em !important;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .w3-btn.w3-indigo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .w3-btn.w3-indigo {
+                padding: 15px 30px !important;
+                font-size: 1.2em !important;
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="w3-container w3-teal">
+        <h1 class="w3-center">Online Car Rental System</h1>
+    </div>
+    <div class="w3-center w3-bar w3-black w3-large">Welcome to Car Rental System - Your Journey Starts Here!</div>
+    <div class="w3-display-container">
+        <div class="w3-display-middle">
+          <p style="color:white; font-size:1.2em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Find the perfect car for your next adventure or business trip. We offer a wide range of vehicles to suit your needs.</p>
+            <form class="w3-container w3-center" action="/customer_portal/login/" method="POST">
+                {% csrf_token %}
+                <input class="w3-indigo w3-btn w3-xxlarge w3-padding-32" type="submit" value="Customer Login">
+            </form>
+            <br><br>
+            <form class="w3-container w3-center" action="/car_dealer_portal/login/" method="POST">
+                {% csrf_token %}
+                <input class="w3-btn w3-indigo w3-xxlarge w3-padding-32" type="submit" value="Car Dealer Login">
+            </form>
+            <p style="color:white; font-size:1em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-top: 20px;">For any inquiries, please contact us at: parasu@gmail.com</p>
+        </div>
+    </div>
+</body>
+</html>

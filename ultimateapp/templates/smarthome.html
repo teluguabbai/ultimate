@@ -1,0 +1,232 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home Service Provider</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: url("{% static 'electronic.jpg' %}") no-repeat center center/cover;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgb(165, 206, 233);
+            padding: 20px;
+            color: black;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .section {
+            margin: 30px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in;
+        }
+
+        .section h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .product {
+            display: inline-block;
+            width: 30%;
+            margin: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            text-align: center;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .product h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 20px;
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 30px auto;
+            text-align: left;
+        }
+
+        .contact-form h2 {
+            color: #007BFF;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .contact-form button {
+            background: #007BFF;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .contact-form button:hover {
+            background: #0056b3;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Smart Home Service Provider
+       
+    </header>
+
+    <div class="container">
+        <section class="motivation">
+            <h2>Transform Your Home with Smart Technology!</h2>
+            <p>Upgrade to a smart home today and experience ultimate convenience, security, and energy efficiency. Control your devices from anywhere, save on energy costs, and enhance your living experience. Join the smart home revolution now!</p>
+        </section>
+
+    <div class="container">
+        <section class="section">
+            <h2>Smart Switches</h2>
+            {% for switch in switches %}
+            <div class="product">
+                <img src="{{ switch.image.url }}" alt="{{ switch.name }}">
+                <h3>{{ switch.name }}</h3>
+                <p class="price">${{ switch.price }}</p>
+            </div>
+            {% empty %}
+            <p>No Smart Switches available.</p>
+            {% endfor %}
+        </section>
+
+        <section class="section">
+            <h2>Smart Sensors</h2>
+            {% for sensor in sensors %}
+            <div class="product">
+                <img src="{{ sensor.image.url }}" alt="{{ sensor.name }}">
+                <h3>{{ sensor.name }}</h3>
+                <p class="price">${{ sensor.price }}</p>
+            </div>
+            {% empty %}
+            <p>No Smart Sensors available.</p>
+            {% endfor %}
+        </section>
+
+        <section class="section">
+            <h2>Smart Modules</h2>
+            {% for module in modules %}
+            <div class="product">
+                <img src="{{ module.image.url }}" alt="{{ module.name }}">
+                <h3>{{ module.name }}</h3>
+                <p class="price">${{ module.price }}</p>
+            </div>
+            {% empty %}
+            <p>No Smart Modules available.</p>
+            {% endfor %}
+        </section>
+
+        <section class="section">
+            <h2>Other Smart Devices</h2>
+            {% for other in others %}
+            <div class="product">
+                <img src="{{ other.image.url }}" alt="{{ other.name }}">
+                <h3>{{ other.name }}</h3>
+                <p class="price">${{ other.price }}</p>
+            </div>
+            {% empty %}
+            <p>No Other Smart Devices available.</p>
+            {% endfor %}
+        </section>
+
+        <div class="contact-form">
+            <h2>Contact Us</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile" name="mobile" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" rows="4" required></textarea>
+
+                <label for="service">What Service Do You Want?</label>
+                <input type="text" id="service" name="service" required>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

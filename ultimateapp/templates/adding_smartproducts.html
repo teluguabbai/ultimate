@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #333;
+        }
+
+        header {
+            background: #007BFF;
+            padding: 20px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 50px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 16px;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        input, select {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Admin - Add New Product
+    </header>
+
+    <div class="container">
+        <h2>Add Smart Home Product</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="id_name">Product Name:</label>
+            {{ form.name }}
+
+            <label for="id_image">Upload Image:</label>
+            {{ form.image }}
+
+            <label for="id_price">Price ($):</label>
+            {{ form.price }}
+
+            <label for="id_category">Category:</label>
+            {{ form.category }}
+
+            <button type="submit">Add Product</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Custom Admin Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        h1, h2 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 40px; background-color: #fff; }
+        th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
+        th { background-color: #eee; }
+        .section { margin-bottom: 50px; }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ request.user.username }}</h1>
+
+    {% for table in tables %}
+        <div class="section">
+            <h2>{{ table.title }}</h2>
+            {% if table.data %}
+                <table>
+                    <thead>
+                        <tr>
+                            {% for field in table.fields %}
+                                <th>{{ field }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for obj in table.data %}
+                            <tr>
+                                {% for field in table.fields %}
+                                    <td>{{ obj[field] }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No records found.</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</body>
+</html>

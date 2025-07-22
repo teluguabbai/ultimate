@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Electric Repair</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+            overflow-x: hidden;
+        }
+        header {
+            background:rgb(230, 233, 236);
+            color: black;
+            text-align: center;
+            padding: 1.5rem 0;
+            animation: fadeInDown 1s ease-out;
+        }
+        .hero {
+            text-align: center;
+            padding: 3rem;
+            background: url("{% static 'electronic.jpg' %}") no-repeat center center/cover; 
+            color: white;
+            animation: fadeInUp 1s ease-out;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #007bff;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 3rem auto;
+            background: white;
+            padding: 2rem;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            animation: fadeIn 1s ease-out;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #333;
+            color: white;
+            margin-top: 2rem;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Home Electric Repair Services</h1>
+    </header>
+    <section class="hero">
+        <h1>Reliable Electric Repairs at Your Doorstep</h1>
+        <p>Fast, affordable, and professional electrical repair services.</p>
+        <a href="#request-form" class="btn">Request a Service</a>
+    </section>
+    <section class="form-container" id="request-form">
+        <h2>Request a Repair Service</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="text" placeholder="Mobile Number" required>
+            <input type="text" placeholder="Your Address" required>
+            <textarea placeholder="Describe the Issue" rows="4" required></textarea>
+            <button type="submit">Submit Request</button>
+        </form>
+    </section>
+    <footer>
+        <p>&copy; 2025 Home Electric Repair. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

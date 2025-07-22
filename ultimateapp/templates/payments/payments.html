@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #payment-form {
+            margin: 20px auto;
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #payment-request-button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Complete Your Payment</h2>
+    <p>Logged in as: {{ request.user.email }}</p>
+
+    <!-- Standard Checkout Form -->
+    <form id="payment-form">
+        <label for="amount">Enter Amount ($):</label>
+        <input type="number" id="amount" name="amount" required min="1">
+        <button type="submit">Pay Now</button>
+    </form>
+
+    <!-- Apple Pay & Google Pay Button -->
+    <div id="payment-request-button"></div>
+
+    <script>
+        const stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
+
+        // Handle standard checkout
+        document.getElementById("payment-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const amount = document.getElementById("amount").value;
+
+            const response = await fetch("{% url 'create-checkout-session' %}", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({ "amount": amount })
+            });
+
+            const session = await response.json();
+            if (session.id) {
+                stripe.redirectToCheckout({ sessionId: session.id });
+            } else {
+                alert("Error: " + session.error);
+            }
+        });
+
+        // Enable Apple Pay / Google Pay
+        const paymentRequest = stripe.paymentRequest({
+            country: 'US',
+            currency: 'usd',
+            total: {
+                label: 'Django Payment',
+                amount: 5000, // Example: $50.00
+            },
+            requestPayerName: true,
+            requestPayerEmail: true,
+        });
+
+        paymentRequest.canMakePayment().then(result => {
+            if (result) {
+                const prButton = stripe.elements().create('paymentRequestButton', {
+                    paymentRequest: paymentRequest,
+                });
+                prButton.mount('#payment-request-button');
+            } else {
+                document.getElementById('payment-request-button').style.display = 'none';
+            }
+        });
+
+    </script>
+</body>
+</html>

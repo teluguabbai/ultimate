@@ -26,7 +26,7 @@ SECRET_KEY = '2r^_cnmg9h3a#lx1&9a@avr*qxf8d$ds_u50wei4tpqb#0*_$0'
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['*']  # Only use this for quick testing
+ALLOWED_HOSTS = ['ultimate-hzqg.onrender.com', 'localhost', '127.0.0.1']
 
 
 
